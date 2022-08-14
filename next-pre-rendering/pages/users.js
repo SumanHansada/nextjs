@@ -17,6 +17,15 @@ function UserList({ users }) {
 
 export default UserList;
 
+//    Static Generation
+//    Static Generation is a method of pre-rendering where the HTML pages are generated at the build time
+//    With and without external data
+//    Export getStaticProps function for external data
+//    HTML, JavaScript and a JSON file are generated
+//    If you navigate directly to the page route, the HTML file is server
+//    If you navigate to the page route from a different route, the page is created client side using the JavaScript
+//    and JSON prefetched from the server
+//
 // 1. getStaticProps run only on the server side
 //    The function will never run client side
 //    The code you write inside getStaticProps won't be included in the JS bundle that is sent to the browser
