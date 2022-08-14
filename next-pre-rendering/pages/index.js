@@ -7,6 +7,9 @@ export default function Home() {
       <Link href="/users" prefetch={false}>
         <a>Users</a>
       </Link>
+      <Link href="/posts" prefetch={false}>
+        <a>Posts</a>
+      </Link>
     </>
   );
 }
