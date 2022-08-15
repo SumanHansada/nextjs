@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
 function Post({ post }) {
-  const router = useRouter();
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
-  }
+  // const router = useRouter();
+  // if (router.isFallback) {
+  //   return <h1>Loading...</h1>;
+  // }
 
   return (
     <>
@@ -63,6 +63,21 @@ export async function getStaticPaths() {
   //    everyone who requests the same page will get the statically pre-rendered page
   //  - This ensures that the users always have a fast experience while preserving fast builds and the benefits of static generation
 
+  //  getStaticPaths fallback:'blocking'
+  //  1.  The paths returned from getStaticPaths will be rendered to HTML at build time by getStaticProps
+  //  2.  The paths that have not been generated at build time will not result in a 404 page. Instead, on first
+  //      request, Next.js will render the page on the server and return the generated HTML
+  //  3.  When that's done, the browser receives the HTML for the generated path. From the user's perspective, it
+  //      will transition from "the browser is requesting the page" to "the full page is loaded". There is no flash of
+  //      loading/fallback state
+  //  4.  At the same time, Next.js keeps track of the new list of pre-rendered pages. Subsequent requests to the same
+  //      path will serve the generated page, just like other pages pre-rendered at build time
+  //  When? to user fallback:'blocking'
+  //  - On a UX level, sometimes, people prefer the page to be loaded without a loading indicator if the wait time is a
+  //    few milliseconds. This helps avoid the layout shift
+  //  - Some crawlers did not support JavaScript. The loading page would be rendered and then the full page would be
+  //    loaded which was causing a problem
+
   return {
     paths: [
       {
@@ -75,7 +90,7 @@ export async function getStaticPaths() {
         params: { postId: "3" },
       },
     ],
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
